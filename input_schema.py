@@ -3,26 +3,36 @@ INPUT_SCHEMA = {
         'datatype': 'STRING',
         'required': True,
         'shape': [1],
-        'example': ["a living room, bright modern Scandinavian style house, large windows, magazine photoshoot, 8k, studio lighting"]
+        'example': ["What is deep learning?"]
     },
-    "negative_prompt": {
-        'datatype': 'STRING',
-        'required': True,
-        'shape': [1],
-        'example': ["low quality"]
-    }
-    ,
-    "num_inference_steps": {
-        'datatype': 'INT8',
-        'required': True,
-        'shape': [1],
-        'example': [28]
-    }
-    ,
-    "guidance_scale": {
+    "temperature": {
         'datatype': 'FP32',
-        'required': True,
+        'required': False,
         'shape': [1],
-        'example': [7.0]
+        'example': [0.7]
+    },
+    "top_p": {
+        'datatype': 'FP32',
+        'required': False,
+        'shape': [1],
+        'example': [0.1]
+    },
+    "repetition_penalty": {
+        'datatype': 'FP32',
+        'required': False,
+        'shape': [1],
+        'example': [1.18]
+    },
+    "max_tokens": {
+        'datatype': 'INT16',
+        'required': False,
+        'shape': [1],
+        'example': [256]
+    },
+    "top_k":{
+        'datatype': 'INT8',
+        'required': False,
+        'shape': [1],
+        'example': [40]
     }
 }
