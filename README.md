@@ -48,12 +48,6 @@ curl --location '<your_inference_url>' \
           "datatype": "BYTES"
         },
         {
-          "name": "system_prompt",
-          "shape": [1],
-          "data": ["You are a helpful bot."],
-          "datatype": "BYTES"
-        },
-        {
           "name": "temperature",
           "optional": true,
           "shape": [1],
@@ -103,16 +97,18 @@ Open the `app.py` file. This contains the main code for inference. It has three 
 
 ```python
 def infer(self, inputs):
-    prompt = inputs["prompt"]
-    negative_prompt = inputs["negative_prompt"]
-    inference_steps = inputs["num_inference_steps"]
-    guidance_scale = inputs["guidance_scale"]
+    prompts = inputs["prompt"]
+    temperature = inputs.get("temperature",0.7)
+    top_p = inputs.get("top_p",0.1)
+    repetition_penalty = inputs.get("repetition_penalty",1.18)
+    top_k = int(inputs.get("top_k",40))
+    max_tokens = inputs.get("max_tokens",256)
 ```
 
 **Finalize** - This function is used to perform any cleanup activity for example you can unload the model from the gpu by setting to `None`.
 ```python
 def finalize(self):
-    self.pipe = None
+    self.llm = None
 ```
 
 For more information refer to the [Inferless docs](https://docs.inferless.com/).
