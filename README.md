@@ -2,7 +2,7 @@
 [Mistral-Small-24B-Instruct](https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501) also known as Mistral Small 3 (2501) is a cutting-edge 24B parameter language model from Mistral AI. Designed for efficient local deployment, this instruction-tuned model excels in low-latency tasks such as conversational agents and function calling. Despite its compact size, it delivers performance comparable to models three times larger, supports multiple languages, and boasts advanced reasoning capabilities all under an open Apache 2.0 license. This makes it a versatile choice for both research and commercial applications.
 
 ## TL;DR:
-- Deployment of stable-diffusion-3-medium-diffusers model using [Diffusers](https://github.com/huggingface/diffusers).
+- Deployment of Mistral-Small-24B-Instruct model using [vLLM](https://github.com/vllm-project/vllm/).
 - Dependencies defined in `inferless-runtime-config.yaml`.
 - GitHub/GitLab template creation with `app.py`, `inferless-runtime-config.yaml` and `inferless.yaml`.
 - Model class in `app.py` with `initialize`, `infer`, and `finalize` functions.
