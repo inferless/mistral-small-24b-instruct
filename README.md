@@ -1,15 +1,14 @@
-# Tutorial - Deploy Stable-Diffusion-3 using Inferless
-[Stable Diffusion 3](https://huggingface.co/stabilityai/stable-diffusion-3-medium-diffusers) sets a new benchmark in AI image generation, delivering unparalleled image quality with enhanced efficiency. Utilizing a sophisticated Multimodal Diffusion Transformer (MMDiT) architecture, it significantly reduces noise and improves clarity.
+# Tutorial - Deploy Mistral-Small-24B-Instruct using Inferless
+[Mistral-Small-24B-Instruct](https://huggingface.co/mistralai/Mistral-Small-24B-Instruct-2501) also known as Mistral Small 3 (2501) is a cutting-edge 24B parameter language model from Mistral AI. Designed for efficient local deployment, this instruction-tuned model excels in low-latency tasks such as conversational agents and function calling. Despite its compact size, it delivers performance comparable to models three times larger, supports multiple languages, and boasts advanced reasoning capabilities all under an open Apache 2.0 license. This makes it a versatile choice for both research and commercial applications.
 
 ## TL;DR:
 - Deployment of stable-diffusion-3-medium-diffusers model using [Diffusers](https://github.com/huggingface/diffusers).
-- You can expect an average latency of `4.4 sec` for generating an image in `28`steps. This setup has an average cold start time of `9.9 sec` *(For benchmark we have used Nvidia A100-80GB GPU)*.
 - Dependencies defined in `inferless-runtime-config.yaml`.
 - GitHub/GitLab template creation with `app.py`, `inferless-runtime-config.yaml` and `inferless.yaml`.
 - Model class in `app.py` with `initialize`, `infer`, and `finalize` functions.
 - Custom runtime creation with necessary system and Python packages.
 - Model import via GitHub with `input_schema.py` file.
-- Recommended GPU: NVIDIA A10.
+- Recommended GPU: NVIDIA A100.
 - Custom runtime selection in advanced configuration.
 - Final review and deployment on the Inferless platform.
 
@@ -38,32 +37,59 @@ Enter all the required details to Import your model. Refer [this link](https://d
 Following is an example of the curl command you can use to make inference. You can find the exact curl command in the Model's API page in Inferless.
 ```bash
 curl --location '<your_inference_url>' \
-          --header 'Content-Type: application/json' \
-          --header 'Authorization: Bearer <your_api_key>' \
-          --data '{
-              "inputs": [
-                {
-                  "data": ["a living room, bright modern Scandinavian style house, large windows, magazine photoshoot, 8k, studio lighting"],
-                  "name": "prompt",
-                  "shape": [1],
-                  "datatype": "BYTES"},
-                {
-                  "data": ["low quality"],
-                  "name": "negative_prompt",
-                  "shape": [1],
-                  "datatype": "BYTES"},
-                {
-                  "data": [28],
-                  "name": "num_inference_steps"
-                  "shape": [1],
-                  "datatype": "INT8"},
-                {
-                  "data": [7.0],
-                  "name": "guidance_scale"
-                  "shape": [1],
-                  "datatype": "FP32"}
-                  ]
-            }'
+    --header 'Content-Type: application/json' \
+    --header 'Authorization: Bearer <your_api_key>' \
+    --data '{
+      "inputs": [
+        {
+          "name": "prompt",
+          "shape": [1],
+          "data": ["What is deep learning?"],
+          "datatype": "BYTES"
+        },
+        {
+          "name": "system_prompt",
+          "shape": [1],
+          "data": ["You are a helpful bot."],
+          "datatype": "BYTES"
+        },
+        {
+          "name": "temperature",
+          "optional": true,
+          "shape": [1],
+          "data": [0.7],
+          "datatype": "FP32"
+        },
+        {
+          "name": "top_p",
+          "optional": true,
+          "shape": [1],
+          "data": [0.1],
+          "datatype": "FP32"
+        },
+        {
+          "name": "repetition_penalty",
+          "optional": true,
+          "shape": [1],
+          "data": [1.18],
+          "datatype": "FP32"
+        },
+        {
+          "name": "max_tokens",
+          "optional": true,
+          "shape": [1],
+          "data": [512],
+          "datatype": "INT16"
+        },
+        {
+          "name": "top_k",
+          "optional": true,
+          "shape": [1],
+          "data": [40],
+          "datatype": "INT8"
+        }
+      ]
+    }'
 ```
 
 
