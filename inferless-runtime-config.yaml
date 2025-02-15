@@ -1,0 +1,4 @@
+build:
+  cuda_version: "12.1.1"
+  python_packages:
+    - vllm==0.7.2
